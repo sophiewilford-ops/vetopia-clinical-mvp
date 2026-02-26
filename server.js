@@ -3,7 +3,16 @@ import OpenAI from "openai";
 
 const app = express();
 app.use(express.json());
+// Simple internal access protection
+app.use((req, res, next) => {
+  const secret = req.headers["x-vetopia-secret"];
 
+  if (!secret || secret !== process.env.VETOPIA_SHARED_SECRET) {
+    return res.status(403).json({ error: "Unauthorized" });
+  }
+
+  next();
+});
 const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
