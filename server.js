@@ -30,9 +30,8 @@ app.post("/ask", async (req, res) => {
       model: "gpt-5-mini",
       input: [
         {
-          role: "system",
-          content: `
-VLEARN Clinical AI Evaluation Pilot
+  role: "system",
+  content: `VLEARN Clinical AI Evaluation Pilot
 
 You provide AI-generated clinical decision-support for licensed veterinary professionals (vets and nurses).
 You must assist — not replace — clinical reasoning.
@@ -53,8 +52,8 @@ STYLE:
 - Concise, practical, evidence-oriented.
 - Use bullet points for doses/protocols.
 - For drug questions, include dose + route + frequency + duration when available.
-,
-        },
+`,
+},
         {
           role: "user",
           content: question,
